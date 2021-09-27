@@ -1,0 +1,9 @@
+@mixin card-title-base {
+  // font-size: 1.5rem;
+  // font-weight: lighter;
+  // margin-bottom: 0.5rem;
+}
+
+:host {
+  @include card-title-base();
+}

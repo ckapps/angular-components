@@ -1,0 +1,59 @@
+@use 'sass:map';
+@use 'sass:meta';
+
+@use '../utils';
+
+$_KEY_COLOR_CONFIG: 'color';
+$_KEY_COMPONENTS_CONFIG: 'components';
+$_KEY_TYPOGRAPHY_CONFIG: 'typography';
+
+/// Gets the color configuration from the given theme or configuration.
+/// @param {Map} $theme The theme map returned from `define-light-theme` or `define-dark-theme`.
+/// @param {Map} $default The default value returned if the given `$theme` does not include a
+///     `color` configuration.
+/// @returns {Map} Color configuration for a theme.
+@function get-color-config($theme, $default: null) {
+  @return utils.map-get-or-default($theme, $_KEY_COLOR_CONFIG, $default);
+}
+
+/// Gets the typography configuration from the given theme or configuration.
+/// For backwards compatibility, typography is not included by default.
+/// @param {Map} $theme  The theme map returned from `define-light-theme` or
+///     `define-dark-theme`.
+/// @param {Map} $default The default value returned if the given `$theme` does not include a
+///     `typography` configuration.
+/// @returns {Map} Typography configuration for a theme.
+@function get-typography-config($theme, $default: null) {
+  @return utils.map-get-or-default($theme, $_KEY_TYPOGRAPHY_CONFIG, $default);
+}
+
+@function get-components-config($theme, $default: null) {
+  @return utils.map-get-or-default($theme, $_KEY_COMPONENTS_CONFIG, $default);
+}
+
+@function get-component-config($theme, $component, $default: null) {
+  $components: get-components-config($theme, null);
+
+  @if $components != null and map.has-key($components, $component) {
+    @return map.get($components, $component);
+  }
+  @return $default;
+}
+
+/// Creates a theme object
+///
+/// @param {Map} $color Color configuration
+/// @param {Map} $typography Typography configuration
+/// @param {Map} $components Components configuration
+///
+/// @returns {Map} Final theme object
+///
+@function create-theme-object($color, $typography, $components) {
+  $theme: (
+    $_KEY_COLOR_CONFIG: $color,
+    $_KEY_COMPONENTS_CONFIG: $components,
+    $_KEY_TYPOGRAPHY_CONFIG: $typography,
+  );
+
+  @return $theme;
+}

@@ -1,0 +1,19 @@
+// This is the single entry point file
+
+@forward './src/lib/core/styles/core' show core;
+
+// theming
+@forward './src/lib/core/theming/theming' show get-color-config,
+  get-typography-config, get-components-config, get-component-config;
+@forward './src/lib/core/theming/theme' show apply-theme, make-theme;
+
+// palettes and coloring
+@forward './src/lib/core/theming/palette';
+@forward './src/lib/core/theming/color' show define-color-scheme;
+
+// typography
+@forward './src/lib/core/theming/typography' show define-typography-level,
+  define-typography-config, typography-hierarchy;
+
+// components
+@forward './src/lib/components';

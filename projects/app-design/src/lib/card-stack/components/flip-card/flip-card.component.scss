@@ -1,0 +1,42 @@
+@use 'sass:math';
+
+$flip-card--transition-time: 0.8s;
+
+:host {
+  background-color: transparent;
+  perspective: 1000px;
+
+  display: flex;
+  transition: z-index, transform math.div($flip-card--transition-time, 4);
+  transition-delay: $flip-card--transition-time, 0s;
+  text-decoration: none;
+  color: inherit;
+  z-index: 0;
+
+  .flip-card-body {
+    border-radius: 0.25rem;
+    flex: 1;
+
+    display: flex;
+    transform-style: preserve-3d;
+    transition: $flip-card--transition-time transform;
+
+    &.flipped {
+      transform: rotateY(180deg);
+    }
+  }
+
+  .front,
+  .back {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+
+    backface-visibility: hidden;
+    min-width: 100%;
+  }
+
+  .back {
+    transform: translate(-100%, 0) rotateY(-180deg);
+  }
+}

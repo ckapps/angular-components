@@ -1,0 +1,32 @@
+// TODO: Get rid of this import
+@use '../src/lib/core/theming/palette';
+
+// Import the SCSS library
+@use '../index' as ckad;
+
+// Define a theme.
+$primary: ckad.define-color-scheme(palette.$purple-palette);
+$accent: ckad.define-color-scheme(palette.$blue-palette);
+$success: ckad.define-color-scheme(palette.$green-palette);
+$error: ckad.define-color-scheme(palette.$red-palette);
+$warn: ckad.define-color-scheme(palette.$orange-palette);
+$neutral: ckad.define-color-scheme(palette.$gray-palette);
+
+$theme: ckad.make-theme(
+  (
+    color: (
+      'primary': $primary,
+      'accent': $accent,
+      'error': $error,
+      'success': $success,
+      'warn': $warn,
+      'is-dark': true,
+    ),
+  )
+);
+
+// Core
+@include ckad.core();
+
+// theming
+@include ckad.apply-theme($theme);

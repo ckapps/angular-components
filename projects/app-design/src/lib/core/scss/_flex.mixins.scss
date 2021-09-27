@@ -1,0 +1,45 @@
+/// Mixin that applies a mapping of CSS property values to CSS classes.
+///
+/// @param {String} $property CSS property
+/// @param {Map} $map Map where keys are used in the resulting class name
+/// and values are values for the given `$property`
+/// @param {String} $prefix An optional prefix
+/// @param {String} $suffix An optional suffix
+///
+@mixin _expand-to-classes($property, $map, $prefix: '', $suffix: '') {
+  @each $name, $value in $map {
+    &-#{$prefix}#{$name}#{$suffix} {
+      #{$property}: $value;
+    }
+  }
+}
+
+// ************************************************************
+// Justify
+// ************************************************************
+/// Mixin that applies flex justify modifiers to the current parent.
+///
+/// @param {Map} $map Map where keys represent the css class name, and values the flex values
+/// @param {String} $prefix A prefix
+/// @param {String} $suffix A suffix
+///
+@mixin apply-justify-map(
+  $map: (
+    'stretch': stretch,
+    'space-between': space-between,
+    'space-around': space-around,
+    'space-evenly': space-evenly,
+    'center': center,
+    'end': flex-end,
+    'start': flex-start,
+  ),
+  $prefix: 'justify-',
+  $suffix: ''
+) {
+  @include _expand-to-classes(
+    $property: justify-content,
+    $map: $map,
+    $prefix: $prefix,
+    $suffix: $suffix
+  );
+}

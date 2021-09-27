@@ -1,0 +1,10 @@
+// $card--background-color: ckd-get-color("gray", "light");
+// $card--color: ckd-get-color("gray", "darkest");
+$card--box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2),
+  0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12) !default;
+$card--border-radius: 0.5rem !default;
+
+$card-component: (
+  'box-shadow': $card--box-shadow,
+  'border-radius': $card--border-radius,
+);

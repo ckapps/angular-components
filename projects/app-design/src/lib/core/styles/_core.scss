@@ -1,0 +1,15 @@
+@use '../scss/flex.mixins' as flex;
+
+/// Mixin that generates prefix flex styles
+@mixin _flex() {
+  .ckad-flex {
+    @include flex.apply-justify-map();
+  }
+}
+
+// ********************************************************
+// Mixin that applies the core styles
+// ********************************************************
+@mixin core() {
+  @include _flex();
+}

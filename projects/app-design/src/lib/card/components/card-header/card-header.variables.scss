@@ -1,0 +1,10 @@
+// background-color: rgba(0,0,0,.03);
+// border-bottom: 1px solid rgba(0,0,0,.125);
+
+$card-header--margin-bottom: 0 !default;
+$card-header--padding: 1rem !default;
+
+$card-header-component: (
+  'margin-bottom': $card-header--margin-bottom,
+  'padding': $card-header--padding,
+);

@@ -1,0 +1,116 @@
+@use 'sass:map';
+@use 'sass:meta';
+
+@use '../core/styles/private';
+@use '../core/theming/color';
+@use '../core/theming/properties' as props;
+@use '../core/theming/theming';
+@use '../core/theming/typography-utils';
+
+@mixin base($config) {
+  .ckad-button {
+    @include props.apply-all-from-map($config);
+  }
+}
+
+@mixin _theme-property($config, $property, $hue, $opacity: null) {
+  @include color.property-from-hue($config, $property, $hue, $opacity);
+}
+
+@mixin color($config) {
+  $background: map.get($config, 'background');
+  $foreground: map.get($config, 'foreground');
+
+  .ckad-button {
+    // Buttons without a background color should inherit the font color. This is necessary to
+    // ensure that the button is readable on custom background colors. It's wrong to always assume
+    // that those buttons are always placed inside of containers with the default background
+    // color of the theme (e.g. themed toolbars).
+    color: inherit;
+    background: transparent;
+
+    @include _theme-property($config, 'color', text);
+
+    &:hover {
+      background: rgba(map.get($foreground, base), 0.1);
+    }
+  }
+
+  .ckad-button--filled {
+    // Default font and background color when not using any color palette.
+    color: color.get-from-color-scheme($foreground, text);
+    background-color: color.get-from-color-scheme($background, raised-button);
+
+    @include _theme-property($config, 'color', default-contrast);
+    @include _theme-property($config, 'background-color', default);
+
+    &:hover {
+      @include _theme-property($config, 'background-color', darker);
+    }
+  }
+
+  .ckad-button {
+    &.ckad-button--outlined {
+      background: transparent;
+      border: 1px solid transparent;
+      @include private.private-theme-overridable-elevation(0, $config);
+      @include _theme-property($config, 'color', text);
+      @include _theme-property($config, 'border-color', text);
+
+      &:hover {
+        @include _theme-property($config, 'color', default-contrast);
+        @include _theme-property($config, 'background-color', default);
+      }
+    }
+
+    &.ckad-button-toggle {
+      background: transparent;
+      border: 1px solid transparent;
+      @include private.private-theme-overridable-elevation(0, $config);
+      @include _theme-property($config, 'color', text);
+      @include _theme-property($config, 'border-color', text);
+
+      &:hover {
+        @include _theme-property($config, 'color', default-contrast);
+        @include _theme-property($config, 'background-color', default, 0.3);
+      }
+
+      &.ckad-button--toggled {
+        @include _theme-property($config, 'color', darker-contrast);
+        @include _theme-property($config, 'background-color', darker);
+        @include _theme-property($config, 'border-color', darker);
+
+        &:hover {
+          @include _theme-property($config, 'color', default-contrast);
+          @include _theme-property($config, 'background-color', default, 0.6);
+        }
+      }
+    }
+  }
+}
+
+@mixin typography($config) {
+  .ckad-button {
+    font: {
+      family: typography-utils.font-family($config, button);
+      size: typography-utils.font-size($config, button);
+      weight: typography-utils.font-weight($config, button);
+    }
+  }
+}
+
+@mixin theme($theme) {
+  $color: theming.get-color-config($theme);
+  $typography: theming.get-typography-config($theme);
+  $component: theming.get-component-config($theme, 'button');
+
+  @if $component != null {
+    @include base($component);
+  }
+  @if $color != null {
+    @include color($color);
+  }
+  @if $typography != null {
+    @include typography($typography);
+  }
+}

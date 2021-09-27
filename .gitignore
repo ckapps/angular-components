@@ -43,3 +43,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+
+## storybook files
+documentation.json
+storybook-static

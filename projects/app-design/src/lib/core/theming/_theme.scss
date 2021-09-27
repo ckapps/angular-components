@@ -1,0 +1,65 @@
+@use 'sass:map';
+
+@use './color';
+@use './components';
+@use './palette';
+@use './theming';
+@use './typography';
+
+@use '../core-theme';
+
+/// Creates a theme object by using defaults and the given `$config`.
+///
+/// @param {Map} $config A configuration object
+///
+/// @returns {Map} A theme object.
+///
+@function make-theme($config) {
+  // Define theme colors.
+  $neutral: color.define-color-scheme(palette.$gray-palette);
+  $color-config: map.merge(
+    (
+      'neutral': $neutral,
+      'is-dark': false,
+      'foreground': palette.$dark-theme-foreground-palette,
+      'background': palette.$dark-theme-background-palette,
+    ),
+    theming.get-color-config($config, ())
+  );
+
+  // Define theme typography.
+  $typography-config: typography.define-typography-config();
+  $typography-config: map.merge(
+    $typography-config,
+    theming.get-typography-config($config, ())
+  );
+
+  // Define component config.
+  $component-config: components.define-component-config();
+  $component-config: map.merge(
+    $component-config,
+    theming.get-components-config($config, ())
+  );
+
+  // Combine into final theme object
+  @return theming.create-theme-object(
+    $color: $color-config,
+    $components: $component-config,
+    $typography: $typography-config
+  );
+}
+
+/// Mixin that applies the given `$theme`.
+///
+/// @param {Map} $theme The theme object
+///
+@mixin apply-theme($theme) {
+  @include core-theme.theme($theme);
+
+  // Apply typography
+  $typography-config: theming.get-typography-config($theme);
+  @include typography.typography-hierarchy($typography-config);
+
+  // Apply component themes
+  @include components.apply-all-component-theme($theme);
+}

@@ -1,0 +1,211 @@
+@use 'sass:map';
+@use 'typography-utils';
+
+/// Defines a typography level from the Material Design spec.
+/// @param {String} $font-size The font-size for this level.
+/// @param {String | Number} $line-height The line-height for this level.
+/// @param {String | Number} $font-weight The font-weight for this level.
+/// @param {String} $font-family The font-family for this level.
+/// @param {String} $letter-spacing The letter-spacing for this level.
+/// @returns {Map} A map representing the definition of this typpographic level.
+@function define-typography-level(
+  $font-size,
+  $line-height: $font-size,
+  $font-weight: 400,
+  $font-family: null,
+  $letter-spacing: normal
+) {
+  @return (
+    font-size: $font-size,
+    line-height: $line-height,
+    font-weight: $font-weight,
+    font-family: $font-family,
+    letter-spacing: $letter-spacing
+  );
+}
+
+/// Defines a collection of typography levels to configure typography for an application.
+///
+/// Note that the Material Design specification does not describe explicit letter-spacing values.
+/// The values here come from reverse engineering the Material Design examples.
+/// @param {String} $font-family Default font-family for levels that don't specify font-family.
+/// @param {Map} $display-4 Configuration for the "display-4" typographic level.
+/// @param {Map} $display-3 Configuration for the "display-3" typographic level.
+/// @param {Map} $display-2 Configuration for the "display-2" typographic level.
+/// @param {Map} $display-1 Configuration for the "display-1" typographic level.
+/// @param {Map} $headline Configuration for the "headline" typographic level.
+/// @param {Map} $title Configuration for the "title" typographic level.
+/// @param {Map} $subheading-2 Configuration for the "subheading-2" typographic level.
+/// @param {Map} $subheading-1 Configuration for the "subheading-1" typographic level.
+/// @param {Map} $body-2 Configuration for the "body-2" typographic level.
+/// @param {Map} $body-1 Configuration for the "body-1" typographic level.
+/// @param {Map} $caption Configuration for the "caption" typographic level.
+/// @param {Map} $button Configuration for the "button" typographic level.
+/// @param {Map} $input Configuration for the "input" typographic level.
+/// @returns {Map} A typography config for the application.
+@function define-typography-config(
+  $font-family: 'Roboto, "Helvetica Neue", sans-serif',
+  $display-4:
+    define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $display-3: define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $display-2:
+    define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $display-1: define-typography-level(34px, 40px, 400),
+  $headline: define-typography-level(24px, 32px, 400),
+  $title: define-typography-level(20px, 32px, 500),
+  $subheading-2: define-typography-level(16px, 28px, 400),
+  $subheading-1: define-typography-level(15px, 24px, 400),
+  $body-2: define-typography-level(14px, 24px, 500),
+  $body-1: define-typography-level(14px, 20px, 400),
+  $caption: define-typography-level(12px, 20px, 400),
+  $button: define-typography-level(14px, 14px, 500),
+  // Line-height must be unit-less fraction of the font-size.
+  $input: define-typography-level(inherit, 1.125, 400)
+) {
+  // Declare an initial map with all of the levels.
+  $config: (
+    display-4: $display-4,
+    display-3: $display-3,
+    display-2: $display-2,
+    display-1: $display-1,
+    headline: $headline,
+    title: $title,
+    subheading-2: $subheading-2,
+    subheading-1: $subheading-1,
+    body-2: $body-2,
+    body-1: $body-1,
+    caption: $caption,
+    button: $button,
+    input: $input,
+  );
+
+  // Loop through the levels and set the `font-family` of the ones that don't have one to the base.
+  // Note that Sass can't modify maps in place, which means that we need to merge and re-assign.
+  @each $key, $level in $config {
+    @if map.get($level, font-family) == null {
+      $new-level: map.merge(
+        $level,
+        (
+          font-family: $font-family,
+        )
+      );
+      $config: map.merge(
+        $config,
+        (
+          $key: $new-level,
+        )
+      );
+    }
+  }
+
+  // Add the base font family to the config.
+  @return map.merge(
+    $config,
+    (
+      font-family: $font-family,
+    )
+  );
+}
+
+/// Emits baseline typographic styles based on a given config.
+/// @param {Map} $config-or-theme A typography config for an entire theme.
+/// @param {String} $selector Ancestor selector under which native elements, such as h1, will
+///     be styled.
+@mixin typography-hierarchy($config, $selector: '.ckad-typography') {
+  .ckad-h1,
+  .ckad-headline,
+  #{$selector} h1 {
+    @include typography-utils.typography-level($config, headline);
+    margin: 0 0 16px;
+  }
+
+  .ckad-h2,
+  .ckad-title,
+  #{$selector} h2 {
+    @include typography-utils.typography-level($config, title);
+    margin: 0 0 16px;
+  }
+
+  .ckad-h3,
+  .ckad-subheading-2,
+  #{$selector} h3 {
+    @include typography-utils.typography-level($config, subheading-2);
+    margin: 0 0 16px;
+  }
+
+  .ckad-h4,
+  .ckad-subheading-1,
+  #{$selector} h4 {
+    @include typography-utils.typography-level($config, subheading-1);
+    margin: 0 0 16px;
+  }
+
+  // Note: the spec doesn't have anything that would correspond to h5 and h6, but we add these for
+  // consistency. The font sizes come from the Chrome user agent styles which have h5 at 0.83em
+  // and h6 at 0.67em.
+  .ckad-h5,
+  #{$selector} h5 {
+    @include typography-utils.scaled-typography-level(
+      $config,
+      body-1,
+      $scaling-map: (font-size: 0.83)
+    );
+
+    margin: 0 0 12px;
+  }
+
+  .ckad-h6,
+  #{$selector} h6 {
+    @include typography-utils.scaled-typography-level(
+      $config,
+      body-1,
+      $scaling-map: (font-size: 0.67)
+    );
+
+    margin: 0 0 12px;
+  }
+
+  .ckad-body-strong,
+  .ckad-body-2 {
+    @include typography-utils.typography-level($config, body-2);
+  }
+
+  .ckad-body,
+  .ckad-body-1,
+  #{$selector} {
+    @include typography-utils.typography-level($config, body-1);
+
+    p {
+      margin: 0 0 12px;
+    }
+  }
+
+  .ckad-small,
+  .ckad-caption {
+    @include typography-utils.typography-level($config, caption);
+  }
+
+  .ckad-display-4,
+  #{$selector} .ckad-display-4 {
+    @include typography-utils.typography-level($config, display-4);
+    margin: 0 0 56px;
+  }
+
+  .ckad-display-3,
+  #{$selector} .ckad-display-3 {
+    @include typography-utils.typography-level($config, display-3);
+    margin: 0 0 64px;
+  }
+
+  .ckad-display-2,
+  #{$selector} .ckad-display-2 {
+    @include typography-utils.typography-level($config, display-2);
+    margin: 0 0 64px;
+  }
+
+  .ckad-display-1,
+  #{$selector} .ckad-display-1 {
+    @include typography-utils.typography-level($config, display-1);
+    margin: 0 0 64px;
+  }
+}

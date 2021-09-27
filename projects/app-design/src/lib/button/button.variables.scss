@@ -1,0 +1,21 @@
+@use '../core/styles/variables';
+
+$button--border-radius: 0.25rem !default;
+$button--min-width: 64px !default;
+$button--line-height: 2rem !default;
+$button--padding: 0 0.5rem !default;
+// transition
+$button--transition-duration: variables.$transition--default--transition-duration !default;
+$button--transition-property: opacity, background-color, border-color !default;
+$button--transition-timing-function: variables.$transition--default--timing-function !default;
+
+$button-component: (
+  'border-radius': $button--border-radius,
+  'min-width': $button--min-width,
+  'line-height': $button--line-height,
+  'padding': $button--padding,
+  // transition
+  'transition-duration': $button--transition-duration,
+  'transition-property': $button--transition-property,
+  'transition-timing-function': $button--transition-timing-function,
+) !default;

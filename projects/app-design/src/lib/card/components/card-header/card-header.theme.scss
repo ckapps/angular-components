@@ -1,0 +1,53 @@
+@use 'sass:map';
+
+@use '../../../core/theming/color';
+@use '../../../core/theming/properties';
+@use '../../../core/theming/theming';
+@use '../../../core/theming/typography-utils';
+
+@mixin base($config) {
+  .ckad-card-header {
+    @include properties.apply-all-from-map($config);
+  }
+}
+
+@mixin _theme-property($theme, $property, $hue) {
+  @include color.property-from-hue($theme, $property, $hue);
+}
+
+@mixin color($config) {
+  // $primary: map.get($config, primary);
+  // $accent: map.get($config, accent);
+  // $warn: map.get($config, warn);
+  // $background: map.get($config, background);
+  // $foreground: map.get($config, foreground);
+
+  .ckad-card-header {
+    @include _theme-property($config, 'color', default-contrast);
+    @include _theme-property($config, 'background-color', default);
+  }
+}
+
+@mixin typography($config) {
+  .ckad-card-header {
+    font: {
+      size: typography-utils.font-size($config, title);
+    }
+  }
+}
+
+@mixin theme($theme) {
+  $color: theming.get-color-config($theme);
+  $typography: theming.get-typography-config($theme);
+  $component: theming.get-component-config($theme, 'card-header');
+
+  @if $component != null {
+    @include base($component);
+  }
+  @if $color != null {
+    @include color($color);
+  }
+  @if $typography != null {
+    @include typography($typography);
+  }
+}

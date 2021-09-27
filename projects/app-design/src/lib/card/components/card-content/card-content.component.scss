@@ -1,0 +1,7 @@
+@mixin card-content-base() {
+  flex-grow: 1;
+}
+
+:host {
+  @include card-content-base();
+}

@@ -1,0 +1,36 @@
+@mixin button-base() {
+  box-sizing: border-box;
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  display: inline-block;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: baseline;
+  text-align: center;
+  margin: 0;
+  overflow: visible;
+  // border: 1px solid transparent;
+}
+
+@mixin button-base-disabled() {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.ckad-button {
+  @include button-base();
+
+  &.ckad-button--disabled {
+    @include button-base-disabled();
+  }
+
+  // &.toggle {
+  //   &:not(.toggled) {
+  //     border-color: $button--default--background-color;
+  //     background-color: rgba($button--default--background-color, 0.5);
+  //   }
+  // }
+}

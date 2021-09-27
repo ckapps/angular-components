@@ -1,0 +1,130 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:string';
+
+@use '../theming/properties';
+
+/// Gets the font size for a level inside a typography config.
+/// @param {Map} $config A typography config.
+/// @param {String} $level A typography level.
+@function font-size($config, $level) {
+  @return map.get($config, $level, font-size);
+}
+
+/// Gets the line height for a level inside a typography config.
+/// @param {Map} $config A typography config.
+/// @param {String} $level A typography level.
+@function line-height($config, $level) {
+  @return map.get($config, $level, line-height);
+}
+
+/// Gets the font weight for a level inside a typography config.
+/// @param {Map} $config A typography config.
+/// @param {String} $level A typography level.
+@function font-weight($config, $level) {
+  @return map.get($config, $level, font-weight);
+}
+
+/// Gets the letter spacing for a level inside a typography config.
+/// @param {Map} $config A typography config.
+/// @param {String} $level A typography level.
+@function letter-spacing($config, $level) {
+  @return map.get($config, $level, letter-spacing);
+}
+
+/// Gets the font-family from a typography config and removes the quotes around it.
+/// @param {Map} $config A typography config.
+/// @param {String} $level A typography level.
+@function font-family($config, $level: null) {
+  $font-family: map.get($config, font-family);
+
+  @if $level != null {
+    $font-family: map.get($config, $level, font-family);
+  }
+
+  // Guard against unquoting non-string values, because it's deprecated.
+  @return if(
+    meta.type-of($font-family) == string,
+    string.unquote($font-family),
+    $font-family
+  );
+}
+
+/// Emits CSS styles for the given typography level.
+/// @param {Map} $config A typography config.
+/// @param {String} $level A typography level.
+@mixin typography-level($config, $level) {
+  $font-size: font-size($config, $level);
+  $font-weight: font-weight($config, $level);
+  $line-height: line-height($config, $level);
+  $font-family: font-family($config, $level);
+
+  @include properties.font-shorthand(
+    $font-size,
+    $font-weight,
+    $line-height,
+    $font-family
+  );
+  letter-spacing: letter-spacing($config, $level);
+}
+
+/// Emits CSS styles for the given typography level.
+/// @param {Map} $config A typography config.
+/// @param {String} $level A typography level.
+@mixin scaled-typography-level($config, $level, $scaling-map: ()) {
+  $font-size: font-size($config, $level);
+  $font-weight: font-weight($config, $level);
+  $line-height: line-height($config, $level);
+  $font-family: font-family($config, $level);
+
+  $scaling-map: map.merge(
+    (
+      font-size: 1,
+      font-weight: 1,
+      line-height: 1,
+    ),
+    $scaling-map
+  );
+
+  // Font size
+  @if (map.has-key($scaling-map, font-size)) {
+    $font-size: _scaled($font-size, map.get($scaling-map, font-size));
+  }
+  // Font weight
+  @if (map.has-key($scaling-map, font-weight)) {
+    $font-weight: _scaled($font-weight, map.get($scaling-map, font-weight));
+  }
+  // Line height
+  @if (map.has-key($scaling-map, line-height)) {
+    $line-height: _scaled($line-height, map.get($scaling-map, line-height));
+  }
+
+  @include properties.font-shorthand(
+    $font-size,
+    $font-weight,
+    $line-height,
+    $font-family
+  );
+  letter-spacing: letter-spacing($config, $level);
+}
+
+@function _scaled($value, $factor) {
+  @if (
+    $factor !=
+      1 and
+      meta.type-of($factor) ==
+      number and
+      meta.type-of($value) ==
+      number
+  ) {
+    @return calc(#{$value} * #{$factor});
+  }
+  @return $value;
+}
+
+/// Coerce a value to `em` if it is a unitless number, otherwise returns
+/// the value provided.
+@function private-coerce-unitless-to-em($value) {
+  @return if(math.is-unitless($value), 1em * $value, $value);
+}

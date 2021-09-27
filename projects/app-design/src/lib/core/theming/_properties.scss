@@ -1,0 +1,54 @@
+@use 'sass:list';
+@use 'sass:map';
+
+@function _has-no-value($value) {
+  @return $value == inherit or $value == null;
+}
+
+@mixin apply-from-map($map, $property) {
+  @if map.has-key($map, $property) {
+    $property-value: map.get($map, $property);
+
+    @if $property-value {
+      #{$property}: $property-value;
+    }
+  }
+}
+
+@mixin apply-all-from-map($map) {
+  @include apply-from-map($map, 'box-shadow');
+  @include apply-from-map($map, 'border-radius');
+  @include apply-from-map($map, 'line-height');
+  @include apply-from-map($map, 'min-width');
+  @include apply-from-map($map, 'padding');
+  // transition
+  @include apply-from-map($map, 'transition-duration');
+  @include apply-from-map($map, 'transition-property');
+  @include apply-from-map($map, 'transition-timing-function');
+}
+
+/// Outputs the shorthand `font` CSS property, based on a set of typography values. Falls back to
+/// the individual properties if a value that isn't allowed in the shorthand is passed in.
+/// @param {String} $font-size The font-size value.
+/// @param {String | Number} $font-weight The font-weight value.
+/// @param {String | Number} $line-height The line-height value.
+/// @param {String} $font-family The font-family value.
+/// @returns {String} The `font` shorthand value combining the given parts.
+@mixin font-shorthand($font-size, $font-weight, $line-height, $font-family) {
+  // If any of the values are set to `inherit`, we can't use the shorthand
+  // so we fall back to passing in the individual properties.
+  @if (
+    _has-no-value($font-size) or
+      _has-no-value($font-weight) or
+      _has-no-value($line-height) or
+      _has-no-value($font-family)
+  ) {
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+    font-family: $font-family;
+  } @else {
+    // Otherwise use the shorthand `font`, because it's the least amount of bytes.
+    font: $font-weight list.slash($font-size, $line-height) $font-family;
+  }
+}

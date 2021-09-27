@@ -1,5 +1,6 @@
-# AngularComponents
+# ckapps Angular components
 
+This is the repository that contains the [`@ckapp/angular-components`](./projects/app-design/README.md) package.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.4.
 
 ## Development server

@@ -1,0 +1,13 @@
+@use 'sass:map';
+
+/// @param {Map} $map The map
+/// @param {String} $key The key for which the value should be returned
+/// @param {Map} $default Value that is returned if the given `$map` has no key `$key`
+///
+/// @returns {*} Value from the map with the given `$key`.
+@function get-or-default($map, $key, $default: null) {
+  @if map.has-key($map, $key) {
+    @return map.get($map, $key);
+  }
+  @return $default;
+}

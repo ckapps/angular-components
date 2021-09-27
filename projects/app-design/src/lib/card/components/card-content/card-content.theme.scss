@@ -1,0 +1,37 @@
+@use 'sass:map';
+
+@use '../../../core/theming/properties';
+@use '../../../core/theming/theming';
+
+@mixin base($config) {
+  .ckad-card-content {
+    @include properties.apply-all-from-map($config);
+  }
+}
+
+@mixin color($config) {
+  $primary: map.get($config, 'primary');
+  $accent: map.get($config, 'accent');
+  $warn: map.get($config, 'warn');
+  $background: map.get($config, 'background');
+  $foreground: map.get($config, 'foreground');
+}
+
+@mixin typography($config) {
+}
+
+@mixin theme($theme) {
+  $color: theming.get-color-config($theme);
+  $typography: theming.get-typography-config($theme);
+  $component: theming.get-component-config($theme, 'card-content');
+
+  @if $component != null {
+    @include base($component);
+  }
+  @if $color != null {
+    @include color($color);
+  }
+  @if $typography != null {
+    @include typography($typography);
+  }
+}

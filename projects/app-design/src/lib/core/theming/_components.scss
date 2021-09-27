@@ -1,0 +1,30 @@
+// component variables
+@use '../../components' as components;
+
+/// @returns {Map} Map with configurations for the components
+///
+@function define-component-config() {
+  $component-config: (
+    'button': components.$button-component,
+    'card': components.$card-component,
+    'card-actions': components.$card-actions-component,
+    'card-content': components.$card-content-component,
+    'card-header': components.$card-header-component,
+  );
+
+  @return $component-config;
+}
+
+/// Applies the given `$theme` for the components
+///
+/// @param {Map} $theme Theme object
+///
+@mixin apply-all-component-theme($theme) {
+  // Button
+  @include components.button-theme($theme);
+  // Card
+  @include components.card-theme($theme);
+  @include components.card-actions-theme($theme);
+  @include components.card-content-theme($theme);
+  @include components.card-header-theme($theme);
+}

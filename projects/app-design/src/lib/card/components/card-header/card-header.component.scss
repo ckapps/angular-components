@@ -1,0 +1,7 @@
+@mixin card-header-base() {
+  display: block;
+}
+
+:host {
+  @include card-header-base();
+}

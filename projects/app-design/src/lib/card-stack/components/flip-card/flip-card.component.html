@@ -1,0 +1,8 @@
+<div class="flip-card-body" [class.flipped]="this.flipped$ | async">
+  <div class="front">
+    <ng-content select="[ckad-flip-card-front]"></ng-content>
+  </div>
+  <div class="back">
+    <ng-content select="[ckad-flip-card-back]"></ng-content>
+  </div>
+</div>
