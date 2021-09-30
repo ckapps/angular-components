@@ -9,7 +9,12 @@
     "test": "ng test",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "npm run docs:json && start-storybook -p 6006",
-    "build-storybook": "npm run docs:json && build-storybook"
+    "build-storybook": "npm run docs:json && build-storybook",
+    "bump:components": "cd projects/app-design && npx standard-version",
+    "bump:pre-release:components": "cd projects/app-design && npx standard-version --pre-release",
+    "publish:components": "cd dist/app-design && npm publish",
+    "release:components": "npm run bump:components && npm run build && npm run publish:components",
+    "prerelease:components": "npm run bump:pre-release:components && npm run build && npm run publish:components"
   },
   "private": true,
   "dependencies": {
