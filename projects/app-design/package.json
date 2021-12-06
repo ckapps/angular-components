@@ -1,6 +1,7 @@
 {
   "name": "@ckapp/angular-components",
   "version": "0.0.4",
+  "description": "ckapps Angular components",
   "publishConfig": {
     "access": "public"
   },
