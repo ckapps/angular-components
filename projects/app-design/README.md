@@ -1,18 +1,11 @@
-<!-- ![CI](https://github.com/ckapps/angular-components/workflows/CI/badge.svg) -->
-
-[![npm version](https://badge.fury.io/js/%40ckapp%2Fmath.svg)](https://www.npmjs.com/@ckapp/angular-components)
-[![Coverage Status](https://coveralls.io/repos/github/ckapps/angular-components/badge.svg?branch=master)](https://coveralls.io/github/ckapps/angular-components?branch=master)
-
 # @ckapp/angular-components
 
+<!-- ![CI][ci-badge] -->
+
+[![npm version][npm-badge]][npm-url]
+[![Coverage Status][coveralls-badge]][coveralls-url]
+
 This library is a collection of components and theming/styling utilities for Angular in the ckapps design.
-It was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
-
-## Code scaffolding
-
-Run `ng generate component component-name --project app-design` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project app-design`.
-
-> Note: Don't forget to add `--project app-design` or else it will be added to the default project in your `angular.json` file.
 
 ## Build
 
@@ -28,4 +21,11 @@ Run `ng test app-design` to execute the unit tests via [Karma](https://karma-run
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference][angular-cli-docs-url] page.
+
+[angular-cli-docs-url]: https://angular.io/cli
+[ci-badge]: https://github.com/ckapps/angular-components/workflows/CI/badge.svg
+[coveralls-badge]: https://coveralls.io/repos/github/ckapps/angular-components/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/ckapps/angular-components?branch=master
+[npm-badge]: https://badge.fury.io/js/%40ckapp%2Fangular-components.svg
+[npm-url]: https://www.npmjs.com/@ckapp/angular-components
