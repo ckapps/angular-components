@@ -1,0 +1,9 @@
+# Artifacts
+coverage
+dist
+lib
+storybook-static
+
+# Other files
+CHANGELOG.md
+tsconfig.json
