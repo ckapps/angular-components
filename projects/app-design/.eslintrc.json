@@ -1,0 +1,40 @@
+{
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": ["!**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": [
+          "projects/app-design/tsconfig.lib.json",
+          "projects/app-design/tsconfig.spec.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": ["element", "attribute"],
+            "prefix": "ckad",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": ["element", "attribute"],
+            "prefix": "ckad",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/no-inputs-metadata-property": 0,
+        "@angular-eslint/no-host-metadata-property": 0
+      }
+    },
+    {
+      "files": ["*.html"],
+      "rules": {}
+    }
+  ]
+}

@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -32,6 +35,15 @@
             "tsConfig": "projects/app-design/tsconfig.spec.json",
             "karmaConfig": "projects/app-design/karma.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/app-design/**/*.ts",
+              "projects/app-design/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -62,7 +74,9 @@
               "projects/dev-app/src/favicon.ico",
               "projects/dev-app/src/assets"
             ],
-            "styles": ["projects/dev-app/src/styles.scss"],
+            "styles": [
+              "projects/dev-app/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -128,8 +142,19 @@
               "projects/dev-app/src/favicon.ico",
               "projects/dev-app/src/assets"
             ],
-            "styles": ["projects/dev-app/src/styles.scss"],
+            "styles": [
+              "projects/dev-app/src/styles.scss"
+            ],
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/dev-app/**/*.ts",
+              "projects/dev-app/**/*.html"
+            ]
           }
         }
       }
@@ -145,8 +170,12 @@
             "index": "",
             "main": "",
             "outputPath": "",
-            "assets": [".storybook/assets"],
-            "styles": [".storybook/storybook-preview.scss"],
+            "assets": [
+              ".storybook/assets"
+            ],
+            "styles": [
+              ".storybook/storybook-preview.scss"
+            ],
             "tsConfig": ".storybook/tsconfig.json"
           }
         }
