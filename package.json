@@ -36,7 +36,7 @@
     "@angular/compiler-cli": "~12.2.0",
     "@angular/elements": "^12.2.5",
     "@babel/core": "^7.15.5",
-    "@compodoc/compodoc": "^1.1.14",
+    "@compodoc/compodoc": "^1.1.16",
     "@storybook/addon-actions": "^6.4.8",
     "@storybook/addon-essentials": "^6.4.8",
     "@storybook/addon-links": "^6.4.8",
