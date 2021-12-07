@@ -1,5 +1,10 @@
 # ckapps Angular components
 
+<!-- ![CI][ci-badge] -->
+
+[![Coverage Status][coveralls-badge]][coveralls-url]
+[![Conventional Commits][conventional-commits-badge]][conventional-commits-url]
+
 This is the repository that contains the [`@ckapp/angular-components`](./projects/app-design/README.md) package.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.4.
 
@@ -26,3 +31,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+[ci-badge]: https://github.com/ckapps/angular-components/workflows/CI/badge.svg
+[conventional-commits-badge]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
+[conventional-commits-url]: https://conventionalcommits.org/
+[coveralls-badge]: https://coveralls.io/repos/github/ckapps/angular-components/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/ckapps/angular-components?branch=master
