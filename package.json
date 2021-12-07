@@ -16,7 +16,6 @@
     "release:components": "npm run bump:components && npm run build && npm run publish:components",
     "prerelease:components": "npm run bump:pre-release:components && npm run build && npm run publish:components",
     "lint": "ng lint",
-    "lint:all": "eslint .",
     "prepare": "husky install"
   },
   "private": true,
