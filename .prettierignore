@@ -1,0 +1,11 @@
+# Artifacts
+coverage
+dist
+storybook-static
+
+# Other files
+CHANGELOG.md
+tsconfig.json
+documentation.json
+angular.json
+.eslintrc.json

@@ -1,0 +1,43 @@
+{
+  "root": true,
+  "overrides": [
+    /**
+     * -----------------------------------------------------
+     * TYPESCRIPT FILES (COMPONENTS, SERVICES ETC) (.ts)
+     * -----------------------------------------------------
+     */
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        // General rules
+        "eslint:recommended",
+        // TypeScript rules
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        // Angular rules
+        "plugin:@angular-eslint/recommended",
+        // This is required if you use inline templates in Components
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ]
+    },
+    /**
+     * -----------------------------------------------------
+     * COMPONENT TEMPLATES
+     * -----------------------------------------------------
+     */
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {
+        /**
+         * Any template/HTML related rules you wish to use/reconfigure over and above the
+         * recommended set provided by the @angular-eslint project would go here.
+         */
+      }
+    }
+  ]
+}

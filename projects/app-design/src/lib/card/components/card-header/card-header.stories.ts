@@ -10,7 +10,11 @@ import {
   CkadCardHeaderComponent,
   CkadCardTitleComponent,
 } from '../../public-api';
-import { colorArgTypes } from '../../../core/common/color.mixin.stories';
+import {
+  colorArgType,
+  colorArgTypes,
+  colorTemplateInput,
+} from '../../../core/common/color.mixin.stories';
 import { ThemePalette } from '../../../core';
 
 export default {
@@ -18,6 +22,7 @@ export default {
   component: CkadCardComponent,
   argTypes: {
     ...colorArgTypes(),
+    headerColor: colorArgType(),
   },
   decorators: [
     moduleMetadata({
@@ -40,8 +45,8 @@ interface CardYolo {
 const TemplateWithHeader: Story<CardYolo> = (args: CardYolo) => ({
   props: args,
   template: `
-  <ckad-card [color]="'${args.color}'">
-    <ckad-card-header [color]="'${args.headerColor}'">
+  <ckad-card [color]="${colorTemplateInput(args.color)}">
+    <ckad-card-header [color]="${colorTemplateInput(args.headerColor)}">
       <ckad-card-title>Title</ckad-card-title>
     </ckad-card-header>
     <ckad-card-content>This is just a simple card with a simple content.</ckad-card-content>
