@@ -18,6 +18,12 @@ export default {
       imports: [CommonModule, CkadCardModule],
     }),
   ],
+  parameters: {
+    controls: {
+      // See https://github.com/storybookjs/storybook/issues/16865
+      exclude: ['flipOnSubject', 'flipped$']
+    }
+  }
 } as Meta;
 
 const Template: Story<CkadFlipCardComponent> = (
