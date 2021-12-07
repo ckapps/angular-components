@@ -1,6 +1,18 @@
 import { AbstractCtor, Ctor } from '../types/ctor';
 import { HasElementRef } from './has-element-ref.type';
 
+/** Possible justify values. */
+export type DefinedJustifyContent =
+  | 'stretch'
+  | 'space-between'
+  | 'space-around'
+  | 'space-evenly'
+  | 'center'
+  | 'end'
+  | 'start';
+/** Possible justify values and undefined. */
+export type JustifyContent = DefinedJustifyContent | undefined;
+
 export interface CanJustify {
   /**
    * Controls justification of content
@@ -8,35 +20,24 @@ export interface CanJustify {
   justifyContent: JustifyContent;
 }
 
-type CanColorCtor = Ctor<CanJustify> & AbstractCtor<CanJustify>;
+type CanJustifyCtor = Ctor<CanJustify> & AbstractCtor<CanJustify>;
 
-export type JustifyContent =
-  | 'stretch'
-  | 'space-between'
-  | 'space-around'
-  | 'space-evenly'
-  | 'center'
-  | 'end'
-  | 'start'
-  | undefined;
-
-function getCssClass(justify: JustifyContent) {
+function getCssClass(justify: DefinedJustifyContent) {
   return `ckad-flex-justify-${justify}`;
 }
 
 /** Mixin to augment a directive with a `justifyContent` property. */
-export function mixinJustify<T extends AbstractCtor<HasElementRef>>(
+export function mixinJustify<
+  T extends AbstractCtor<HasElementRef<HTMLElement>>,
+>(base: T, defaultJustify?: JustifyContent): CanJustifyCtor & T;
+export function mixinJustify<T extends Ctor<HasElementRef<HTMLElement>>>(
   base: T,
   defaultJustify?: JustifyContent,
-): CanColorCtor & T;
-export function mixinJustify<T extends Ctor<HasElementRef>>(
-  base: T,
-  defaultJustify?: JustifyContent,
-): CanColorCtor & T {
+): CanJustifyCtor & T {
   return class extends base {
     private _justify: JustifyContent;
 
-    get justifyContent(): JustifyContent {
+    get justifyContent() {
       return this._justify;
     }
 
@@ -59,6 +60,7 @@ export function mixinJustify<T extends Ctor<HasElementRef>>(
       }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(...args: any[]) {
       super(...args);
 

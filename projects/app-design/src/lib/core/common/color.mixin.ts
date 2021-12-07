@@ -1,7 +1,10 @@
 import { AbstractCtor, Ctor } from '../types/ctor';
 import { HasElementRef } from './has-element-ref.type';
 
-/** @docs-private */
+export type DefinedThemePalette = 'primary' | 'accent' | 'warn';
+/** Possible color palette values. */
+export type ThemePalette = DefinedThemePalette | undefined;
+
 export interface CanColor {
   /** Theme color palette for the component. */
   color: ThemePalette;
@@ -12,21 +15,23 @@ export interface CanColor {
 
 type CanColorCtor = Ctor<CanColor> & AbstractCtor<CanColor>;
 
-/** Possible color palette values. */
-export type ThemePalette = 'primary' | 'accent' | 'warn' | undefined;
-
-function getCssClass(color: ThemePalette) {
+/**
+ * @param color Named theme palette color
+ * @returns
+ * CSS class name for theme palette `color`
+ */
+function getCssClass(color: DefinedThemePalette) {
   return `ckad-color-${color}`;
 }
 
 /**
  * Mixin to augment a directive with a `color` property.
  */
-export function mixinColor<T extends AbstractCtor<HasElementRef>>(
+export function mixinColor<T extends AbstractCtor<HasElementRef<HTMLElement>>>(
   base: T,
   defaultColor?: ThemePalette,
 ): CanColorCtor & T;
-export function mixinColor<T extends Ctor<HasElementRef>>(
+export function mixinColor<T extends Ctor<HasElementRef<HTMLElement>>>(
   base: T,
   defaultColor?: ThemePalette,
 ): CanColorCtor & T {
@@ -56,6 +61,7 @@ export function mixinColor<T extends Ctor<HasElementRef>>(
       }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(...args: any[]) {
       super(...args);
 

@@ -5,7 +5,7 @@ import { mixinColor, mixinDisabled } from '../core';
 const CkadButtonBase = mixinColor(
   mixinDisabled(
     class {
-      constructor(public _elementRef: ElementRef) {}
+      constructor(public _elementRef: ElementRef<HTMLElement>) {}
     },
   ),
 );
@@ -31,7 +31,7 @@ export class CkadButtonComponent extends CkadButtonBase {
   /**
    * Use an outlined version of the button
    */
-  @Input() outlined: boolean = false;
+  @Input() outlined = false;
 
   constructor(el: ElementRef) {
     super(el);
@@ -79,7 +79,7 @@ export class CkadAnchorButtonComponent extends CkadButtonComponent {
   },
 })
 export class CkadToggleButtonComponent extends CkadButtonComponent {
-  @Input() toggled: boolean = false;
+  @Input() toggled = false;
 
   constructor(el: ElementRef) {
     super(el);

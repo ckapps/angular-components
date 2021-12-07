@@ -4,7 +4,7 @@ import { mixinJustify } from '../../../core/common/flex.mixin';
 
 const CkadCardActionsBase = mixinJustify(
   class {
-    constructor(public _elementRef: ElementRef) {}
+    constructor(public _elementRef: ElementRef<HTMLElement>) {}
   },
 );
 
@@ -21,7 +21,7 @@ const CkadCardActionsBase = mixinJustify(
   },
 })
 export class CkadCardActionsComponent extends CkadCardActionsBase {
-  constructor(_elementRef: ElementRef) {
+  constructor(_elementRef: ElementRef<HTMLElement>) {
     super(_elementRef);
   }
 }

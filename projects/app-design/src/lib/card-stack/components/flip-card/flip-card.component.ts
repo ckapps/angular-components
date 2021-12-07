@@ -31,7 +31,7 @@ export class CkadFlipCardBackDirective {}
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CkadFlipCardComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() invert: boolean = false;
+  @Input() invert = false;
   @Input() flipOn: FlipOn = 'click';
 
   /**
@@ -41,7 +41,7 @@ export class CkadFlipCardComponent implements OnInit, OnChanges, OnDestroy {
 
   private readonly flipOnSubject = new Subject<FlipOn>();
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef<HTMLElement>) {}
 
   ngOnInit(): void {
     this.flipped$ = this.flipOnSubject.asObservable().pipe(
@@ -65,7 +65,7 @@ export class CkadFlipCardComponent implements OnInit, OnChanges, OnDestroy {
     this.flipOnSubject.complete();
   }
 
-  getFlippedHandlers(flipOn: FlipOn) {
+  getFlippedHandlers(flipOn: FlipOn): Observable<boolean> {
     const host = this.el.nativeElement;
     const clicked$ = fromEvent(host, 'click');
     const mouseEnter$ = fromEvent(host, 'mouseenter');

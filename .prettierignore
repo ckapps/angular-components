@@ -1,7 +1,6 @@
 # Artifacts
 coverage
 dist
-lib
 storybook-static
 
 # Other files

@@ -1,7 +1,10 @@
 // also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { disabledArgTypes } from '../core/common/disabled.mixin.stories';
-import { colorArgTypes } from '../core/common/color.mixin.stories';
+import {
+  colorArgTypes,
+  colorTemplateInput,
+} from '../core/common/color.mixin.stories';
 
 import { CkadButtonComponent } from './button.component';
 
@@ -14,15 +17,18 @@ export default {
   },
 } as Meta;
 
-const asString = (s: any) => (typeof s === 'string' ? `'${s}'` : null);
+// TODO: Make this a global helper
+function booleanTemplateInput(value: boolean) {
+  return value ? `'true'` : `'null'`;
+}
 
 const Template: Story<CkadButtonComponent> = args => ({
   props: args,
   template: `
   <button ckad-button
-    [disabled]="${args.disabled}"
-    [color]="${asString(args.color)}"
-    [outlined]="${args.outlined}">
+    [disabled]="${booleanTemplateInput(args.disabled)}"
+    [color]="${colorTemplateInput(args.color)}"
+    [outlined]="${booleanTemplateInput(args.outlined)}">
       Click me
   </button>`,
 });
