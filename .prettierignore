@@ -8,3 +8,5 @@ storybook-static
 CHANGELOG.md
 tsconfig.json
 documentation.json
+angular.json
+.eslintrc.json
