@@ -43,7 +43,7 @@
     "@angular/cli": "~12.2.4",
     "@angular/compiler-cli": "~12.2.0",
     "@angular/elements": "^12.2.5",
-    "@babel/core": "^7.15.5",
+    "@babel/core": "^7.17.8",
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
     "@compodoc/compodoc": "^1.1.16",
