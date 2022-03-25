@@ -44,7 +44,7 @@
     "@angular/compiler-cli": "~12.2.0",
     "@angular/elements": "^12.2.5",
     "@babel/core": "^7.15.5",
-    "@commitlint/cli": "^15.0.0",
+    "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
     "@compodoc/compodoc": "^1.1.16",
     "@storybook/addon-actions": "^6.4.8",
