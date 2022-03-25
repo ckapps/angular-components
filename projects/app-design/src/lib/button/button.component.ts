@@ -33,7 +33,7 @@ export class CkadButtonComponent extends CkadButtonBase {
    */
   @Input() outlined = false;
 
-  constructor(el: ElementRef) {
+  constructor(el: ElementRef<HTMLElement>) {
     super(el);
   }
 }
@@ -56,7 +56,7 @@ export class CkadButtonComponent extends CkadButtonBase {
   },
 })
 export class CkadAnchorButtonComponent extends CkadButtonComponent {
-  constructor(el: ElementRef) {
+  constructor(el: ElementRef<HTMLElement>) {
     super(el);
   }
 }
@@ -81,7 +81,7 @@ export class CkadAnchorButtonComponent extends CkadButtonComponent {
 export class CkadToggleButtonComponent extends CkadButtonComponent {
   @Input() toggled = false;
 
-  constructor(el: ElementRef) {
+  constructor(el: ElementRef<HTMLElement>) {
     super(el);
     this.outlined = true;
   }
