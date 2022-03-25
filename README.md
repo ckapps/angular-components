@@ -1,12 +1,22 @@
-# ckapps Angular components
+<div style="text-align: center;">
 
-<!-- ![CI][ci-badge] -->
-
-[![Coverage Status][coveralls-badge]][coveralls-url]
+![CI][ci-main-badge]
+[![Coverage Status][cov-badge]][cov-url]
 [![Conventional Commits][conventional-commits-badge]][conventional-commits-url]
 
-This is the repository that contains the [`@ckapp/angular-components`](./projects/app-design/README.md) package.
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.4.
+</div>
+<div style="text-align: center;">
+
+<!-- [![npm version][npm-next-badge]][npm-next-url] -->
+
+</div>
+
+# @ckapp Angular components
+
+This is the repository that contains
+
+- [`@ckapp/angular-components`](./projects/app-design/README.md) package <br />
+  [![npm version][npm-components-latest-badge]][npm-components-latest-url]
 
 ## Development server
 
@@ -32,8 +42,10 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-[ci-badge]: https://github.com/ckapps/angular-components/workflows/CI/badge.svg
+[ci-main-badge]: https://github.com/ckapps/angular-components/workflows/CI/badge.svg
 [conventional-commits-badge]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
 [conventional-commits-url]: https://conventionalcommits.org/
-[coveralls-badge]: https://coveralls.io/repos/github/ckapps/angular-components/badge.svg?branch=master
-[coveralls-url]: https://coveralls.io/github/ckapps/angular-components?branch=master
+[cov-badge]: https://coveralls.io/repos/github/ckapps/angular-components/badge.svg?branch=main
+[cov-url]: https://coveralls.io/github/ckapps/angular-components?branch=main
+[npm-components-latest-badge]: https://img.shields.io/npm/v/@ckapp/angular-components/latest.svg
+[npm-components-latest-url]: https://www.npmjs.com/@ckapp/angular-components
