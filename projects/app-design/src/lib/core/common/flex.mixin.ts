@@ -62,6 +62,7 @@ export function mixinJustify<T extends Ctor<HasElementRef<HTMLElement>>>(
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(...args: any[]) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       super(...args);
 
       // Set the default value.

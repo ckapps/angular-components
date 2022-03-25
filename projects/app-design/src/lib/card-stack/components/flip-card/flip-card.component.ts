@@ -57,7 +57,7 @@ export class CkadFlipCardComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.flipOn && !changes.flipOn.firstChange) {
-      this.flipOnSubject.next(changes.flipOn.currentValue);
+      this.flipOnSubject.next(changes.flipOn.currentValue as FlipOn);
     }
   }
 
