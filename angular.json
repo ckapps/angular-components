@@ -36,6 +36,22 @@
               "projects/app-design/**/*.html"
             ]
           }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "browserTarget": "app-design:build",
+            "styles": [
+              ".storybook/storybook-preview.scss"
+            ]
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "browserTarget": "app-design:build-storybook",
+            "port": 6006
+          }
         }
       }
     },
@@ -129,28 +145,6 @@
               "projects/dev-app/**/*.ts",
               "projects/dev-app/**/*.html"
             ]
-          }
-        }
-      }
-    },
-    "storybook": {
-      "projectType": "application",
-      "root": "",
-      "sourceRoot": ".storybook",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "index": "",
-            "main": "",
-            "outputPath": "",
-            "assets": [
-              ".storybook/assets"
-            ],
-            "styles": [
-              ".storybook/storybook-preview.scss"
-            ],
-            "tsConfig": ".storybook/tsconfig.json"
           }
         }
       }
