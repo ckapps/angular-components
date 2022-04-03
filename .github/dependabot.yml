@@ -8,6 +8,7 @@ updates:
   ## Keeping npm dependencies up to date
   - package-ecosystem: 'npm' # See documentation for possible values
     directory: '/' # Location of package manifests
+    open-pull-requests-limit: 15
     schedule:
       interval: 'monthly'
     commit-message:
