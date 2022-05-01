@@ -54,7 +54,7 @@
     "@storybook/preset-scss": "^1.0.3",
     "@types/jest": "^27.4.1",
     "@types/node": "^12.11.1",
-    "@typescript-eslint/eslint-plugin": "5.17.0",
+    "@typescript-eslint/eslint-plugin": "5.21.0",
     "@typescript-eslint/parser": "5.17.0",
     "@webcomponents/custom-elements": "^1.5.0",
     "babel-loader": "^8.2.4",
